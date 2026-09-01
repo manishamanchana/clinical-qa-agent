@@ -17,8 +17,15 @@ is low. Informational only — no diagnostic/treatment advice, must not be
 framed as a deployable clinical tool.
 
 ## Stack
-Python, LangChain, FAISS (vector store), AWS Bedrock (LLM), Streamlit,
+Python, LangChain, FAISS (vector store), Ollama (local LLM), Streamlit,
 Docker for packaging.
+
+Note: original scoping doc specifies AWS Bedrock as the LLM (see quote
+below). Switched to Ollama (2026-08-31) to avoid AWS account/billing
+setup — decision doesn't affect outreach fit since Osborne/Mosa's
+interest is LLM/NLP/predictive modeling generally, not the specific
+cloud vendor. Swappable back to Bedrock later via `langchain-aws`
+(already in requirements.txt) if desired — see PLAN.md.
 
 ## Deliverable (target: 2–3 days)
 A containerized app/notebook that ingests a small guideline corpus,
