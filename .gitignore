@@ -13,10 +13,11 @@ env/
 *.pem
 
 # Vector store / data artifacts
-faiss_index/
-data/raw/
+# data/raw/ (source PDFs) and data/faiss_index/ (built index) are
+# intentionally tracked, not ignored — this is a small (~3.4MB), public
+# corpus, and committing it means `git clone` + run works with no
+# re-ingestion step. See README "Setup".
 data/processed/
-*.index
 
 # Jupyter
 .ipynb_checkpoints/
