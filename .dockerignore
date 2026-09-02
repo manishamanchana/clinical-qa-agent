@@ -1,0 +1,13 @@
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+.git/
+.ipynb_checkpoints/
+notebooks/
+data/raw/
+data/processed/
+.DS_Store
+.vscode/
+.idea/
