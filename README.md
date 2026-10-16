@@ -61,7 +61,7 @@ Python, LangChain, FAISS (vector store), Ollama (local LLM: `llama3.2:3b`
 
 **Locally:**
 ```bash
-streamlit run app/app.py
+python -m streamlit run app/app.py
 ```
 Opens at `http://localhost:8501`.
 
