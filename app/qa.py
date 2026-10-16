@@ -9,8 +9,8 @@ import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from langchain_community.embeddings import OllamaEmbeddings
-from langchain_community.llms import Ollama
+from langchain_ollama import OllamaEmbeddings
+from langchain_ollama import OllamaLLM
 from langchain_community.vectorstores import FAISS
 
 # Configurable via env so the same code runs unchanged whether Ollama is on
@@ -90,10 +90,10 @@ def get_vectorstore() -> FAISS:
     return _vectorstore
 
 
-def get_llm() -> Ollama:
+def get_llm() -> OllamaLLM:
     global _llm
     if _llm is None:
-        _llm = Ollama(model=LLM_MODEL, base_url=OLLAMA_BASE_URL)
+        _llm = OllamaLLM(model=LLM_MODEL, base_url=OLLAMA_BASE_URL)
     return _llm
 
 

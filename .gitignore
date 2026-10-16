@@ -31,3 +31,5 @@ data/processed/
 
 # Docker
 *.log
+CLAUDE.md
+PLAN.md

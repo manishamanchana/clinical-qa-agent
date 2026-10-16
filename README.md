@@ -74,10 +74,7 @@ docker run -p 8501:8501 clinical-qa-agent
 On Linux, add `--add-host=host.docker.internal:host-gateway` to the `run`
 command (Docker Desktop on Mac/Windows resolves this automatically).
 
-> Note: the Dockerfile follows standard practice for a Streamlit app but
-> hasn't been build-tested on this machine (Docker isn't installed here).
-> If `docker build` surfaces an issue, it's most likely in the
-> `host.docker.internal` networking step above.
+Tested with Docker Desktop on macOS (Apple Silicon).
 
 ## Example Q&A
 
@@ -115,5 +112,15 @@ app/            Streamlit app + the RAG chain/guardrail module it imports
 notebooks/      Day-by-day build notebooks (ingestion, then chain+guardrails)
 data/raw/       Source PDFs
 data/faiss_index/  Built FAISS index
-PLAN.md         Day-by-day build plan and the decisions made along the way
 ```
+
+## Known limitations
+
+- No automated tests; behavior was verified manually (see notebooks).
+- Chunk size (4000 characters, 400 overlap) was not tuned or compared
+  against alternatives.
+- The confidence threshold was set through manual testing
+  (`notebooks/02_qa_chain.ipynb`), not validated on a labeled
+  evaluation set.
+- Demonstration only, built on public guideline documents. Not a
+  diagnostic, treatment, or deployable clinical tool.
