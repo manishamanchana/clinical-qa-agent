@@ -21,9 +21,12 @@ EMBEDDING_MODEL = "nomic-embed-text"
 LLM_MODEL = "llama3.2:3b"
 INDEX_PATH = Path(__file__).resolve().parent.parent / "data" / "faiss_index"
 
-# Picked empirically (2026-09-01, see PLAN.md): answerable-question top-1
-# FAISS L2 distances landed at 196-276, unanswerable ones at 368+.
-CONFIDENCE_THRESHOLD = 320.0
+# - Date: 2026-10-17
+# - Why it changed: the index was rebuilt with langchain_ollama embeddings, which are normalized (length 1), so scores now fall between 0 and 4
+# - The evidence: answerable questions scored 0.329–0.433, unanswerable 0.745+
+# - The method: midpoint of that gap
+
+CONFIDENCE_THRESHOLD = 0.59
 
 ANSWER_PROMPT = """You are a clinical guideline assistant. Answer the question \
 using ONLY the context below, which is excerpted from public CDC/WHO/USPSTF \
@@ -93,7 +96,7 @@ def get_vectorstore() -> FAISS:
 def get_llm() -> OllamaLLM:
     global _llm
     if _llm is None:
-        _llm = OllamaLLM(model=LLM_MODEL, base_url=OLLAMA_BASE_URL)
+        _llm = OllamaLLM(model=LLM_MODEL, base_url=OLLAMA_BASE_URL, num_ctx=8192)
     return _llm
 
 
